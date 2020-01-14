@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="../" />
+    <title>Web to Plex | FAQs</title>
+
+    <meta charset="utf-8"/>
+    <meta name="theme-color" content="#F34245"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Web to Plex, Frequently Asked Questions (FAQ)."/>
+
+    <link rel="shortcut icon" href="icon/48.png"/>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+</head>
+<body>
+    <div id="main-container">
+        <!-- Header -->
+        <header>
+            <left>
+                <a href="/"><img id="icon" src="image/logo.png" height="40px"/></a>
+            </left>
+            <right>
+                <a class="button" href="/#install">Install</a>
+            </right>
+        </header>
+
+        <h3 orange>Web to Plex &mdash; FAQs</h3>
+
+        <!-- Main content holder -->
+        <section grey orange: -dark-grey left style="padding: 4em">
+            <!-- What do I need? -->
+            <h3 id="what-do-i-need-to-use-web-to-plex-" center center>
+                <a name="What do I need to use Web to Plex?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>What do I need to use Web to Plex?
+            </h3>
+            You will need:
+            <ul>
+                <li>Google Chrome (“Chromium” on *nix machines)</li>
+                <li>Mozilla Firefox</li>
+                <li>Microsoft Edge (Chromium version)</li>
+                <li>Opera (Chromium version)
+                    <ul>
+                        <li>Safari (Chromium version) support is projected for <em>2020</em> or later (if it isn’t just a rumor)</li>
+                    </ul>
+                </li>
+                <li>A valid <a href="https://plex.tv/">Plex</a> account and functioning server (<strong>recommended</strong>)</li>
+                <li>At least one valid NZB media manager (<strong>recommended</strong>):
+                    <ul>
+                        <li><a href="http://radarr.video/">Radarr</a> (movies)</li>
+                        <li><a href="https://sonarr.tv/">Sonarr</a> (TV shows)</li>
+                        <li><a href="https://nosmokingbandit.github.io/">Watcher</a> (movies)</li>
+                        <li><a href="https://couchpota.to/">Couchpotato</a> (movies)</li>
+                        <li><a href="https://ombi.io/">Ombi</a> (movies/TV shows)</li>
+                        <li><a href="https://pymedusa.com/">Medusa</a> (TV shows)</li>
+                        <li><a href="https://sickbeard.com/">Sick Beard</a> (TV shows)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- I can't find my token -->
+            <h3 id="i-can-t-find-my-plex-token-what-should-i-do-" center>
+                <a name="I can’t find my Plex token, what should I do?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>I can’t find my Plex token, what should I do?
+            </h3>
+            Please read <a href="https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/">Finding an authentication token / X-Plex-Token</a>, explaining where and how you can find a Plex token.
+            <br>
+            If you still can’t seem to find your Plex token, then please use an alternative method under <a href="https://github.com/SpaceK33z/web-to-plex/wiki/Settings#login--login-settings"><strong>Login | Login Settings</strong></a>.
+            <br>
+            <em>Please note that your credentials won’t be saved, only your <strong>Plex token</strong>.</em>
+
+            <!-- Why isn't it working? -->
+            <h3 id="why-isn-t-the-extension-working-" center>
+                <a name="Why isn’t the extension working?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                Why isn’t the extension working?
+            </h3>
+            Please be sure to fill out the options page and <strong>press the save button</strong> at the end of the page.
+
+            <!-- Mixed Content ERROR -->
+            <h3 id="i-filled-out-the-options-but-it-still-doesn-t-work-code-mixed-content-code-error-" center>
+                <a name="I filled out the options, but it still doesn’t work (<code>Mixed Content</code> Error)" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                I filled out the options, but it still doesn’t work (<code>Mixed Content</code> Error)
+            </h3>
+            For the URLs you’ve entered, be sure to include <code>HTTPS</code> (if you’re allowed) and not <code>HTTP</code>.
+            <br>
+            If you’re not allowed to use <code>HTTPS</code>, then please enable the <code>Force Secure Connections</code> option under <a href="https://github.com/SpaceK33z/web-to-plex/wiki/Settings#connection-settings--proxy-settings"><strong>Connection Settings | Proxy Settings</strong></a>.
+
+            <!-- Firefox/Safari not working -->
+            <h3 id="i-filled-out-the-options-but-it-still-doesn-t-work-firefox-safari-" center>
+                <a name="I filled out the options, but it still doesn’t work (Firefox/Safari)" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                I filled out the options, but it still doesn’t work (Firefox/Safari)
+            </h3>
+            Please be sure you’re using the <strong>stable</strong> version from your extension store, or directly from <a href="https://github.com/SpaceK33z/web-to-plex/">SpaceK33z</a>.
+            <br>
+            If you’re using the version from <a href="https://github.com/Ephellon/web-to-plex/">Ephellon</a> then you’re using the <strong>unstable</strong> version meant for testing on Chrome <strong>only</strong>.
+
+            <h3 id="why-does-the-extension-ask-for-permission-to-change-site-data-" center><a name="Why does the extension ask for permission to change site data?" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Why does the extension ask for permission to change site data?</h3>This is used in order to add the Web to Plex button to the site.
+            For Couchpotato users, this is also used to communicate with Couchpotato (as it requires content embedding).
+
+            <h3 id="what-about-my-privacy-how-are-my-credentials-used-stored-" center>
+                <a name="What about my privacy? How are my credentials used/stored?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                What about my privacy? How are my credentials used/stored?
+            </h3>
+            <a href="privacy">Privacy Policy</a>: Your credentials are used only to communicate with the respective service (i.e. your Couchpotato credentials won’t be sent to Watcher 3, only to Couchpotato).
+            <br>
+            <strong>When sending a request to a service, <a href="https://wikipedia.org/wiki/Basic_access_authroization">Basic Access Authorization</a> will be used.</strong>
+            <br>
+            Your credentials are stored according to your browser’s settings:
+            <ul>
+                <li><strong>Chrome/Chromium</strong>: remotely (if enabled) on Google’s password servers, and/or locally (on your device)</li>
+                <li><strong>Opera</strong>: remotely (if enabled) on Opera’s password servers, and/or locally (on your device)</li>
+                <li><strong>Firefox</strong>: remotely (if enabled) on Mozilla’s password servers, and/or locally (on your device)</li>
+                <li><strong>Safari</strong>: remotely (if enabled) on Apple’s password servers, and/or locally (on your device)</li>
+                <li><strong>Edge</strong>: remotely (if enabled) on Microsoft’s password servers, and/or locally (on your device)</li>
+            </ul>
+            More information on how your credentials are stored can be found in your browser’s settings.
+
+            <h3 id="why-does-the-extension-want-access-to-all-sites-" center>
+                <a name="Why does the extension want access to all sites?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                Why does the extension want access to all sites?
+            </h3>
+            This permission is used to communicate with HTTPS served pages.
+            In latent terms, if you want to use <code>https://localhost:32400</code> (Plex), the extension needs permission to communicate with <code>https://localhost</code>.
+            By accessing all URLs, sites can be added much easier, without having to send multiple prompts for access to the same site (i.e. HTTPS v. HTTP served pages).
+
+            <h3 id="why-is-em-plex-it-em-on-github-and-not-built-in-" center>
+                <a name="Why is <em>Plex It!</em> on GitHub and not built in?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                Why is <em>Plex It!</em> on GitHub and not built in?
+            </h3>
+            This is for easing maintenance. Instead of releasing new versions of Web to Plex every time <em>Plex It!</em> changes, it can simply be hosted here and changed seamlessly.
+
+            <h3 id="why-is-em-plex-it-em-running-so-slow-" center>
+                <a name="Why is <em>Plex It!</em> running so slow?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                Why is <em>Plex It!</em> running so slow?
+            </h3>
+            This could be one of many things, but we recommend white-listing <code>https://ephellon.github.io/</code>, <code>http://localhost/</code> and <code>https://localhost/</code> in your AdBlocker’s settings (there aren’t any ads, so it’s running for no reason).
+
+            <h3 id="can-i-use-the-extension-outside-of-my-browser-" center>
+                <a name="Can I use the extension outside of my browser?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                Can I use the extension outside of my browser?
+            </h3>
+            No. The extension runs entirely within your browser, on your device.
+            The extension only communicates with your NZB manager(s), the supported sites, GitHub (this site) if enabled, and the store (where you installed the extension) for updates.
+            On Apple devices (running Safari), although an external application is used to install the extension, there aren’t any external scripts used by this application.
+
+            <h3 id="what-data-is-sent-to-sites-i-visit-" center>
+                <a name="What data is sent to sites I visit?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                What data is sent to sites I visit?
+            </h3>
+            Sites (other than <em>Plex It!</em>) are never sent any data from this extension.
+            The site’s code is modified with a finished button that contains a URL to Plex (if the item is found), or just a button with IDs that the extension uses later.
+            <br>
+            <em>Plex It!</em> is sent the same information above, as well as the item’s image (if available) once the “add to Plex It!” button is pressed by the user.
+
+            <h3 id="what-if-i-visit-a-site-that-s-not-on-the-supported-list-" center>
+                <a name="What if I visit a site that’s not on the supported list?" class="reference-link"></a>
+                <span class="header-link octicon octicon-link"></span>
+                What if I visit a site that’s not on the supported list?
+            </h3>
+            Sites not approved for full implementation can be found under the <a href="https://github.com/SpaceK33z/web-to-plex/wiki/Settings#site-settings--experimental-sites"><strong>Site Settings | Experimental Sites</strong></a> section of the options page.
+            If the site isn’t on that list or the Default Sites’ list, Web to Plex doesn’t bother running.
+            <br>
+            Sites that are on the experimental list must be enabled by the user before they will work.
+        </section>
+
+        <!-- Footer -->
+        <footer grey -black>
+            <table>
+                <tr>
+                    <!-- Titles -->
+                    <td h4 white><a href="#">Downloads</a></td>
+                    <td h4 white><a href="#">Support</a></td>
+                    <td h4 white><a href="#">Contact</a></td>
+                    <td h4 white><a href="#">Information</a></td>
+                </tr>
+                <tr>
+                    <!-- Sub-Titles -->
+                    <td><a href="https://www.plex.tv/media-server-downloads/">Plex Media Serer</a></td>
+                    <td><a href="https://github.com/SpaceK33z/web-to-plex/">GitHub</a></td>
+                    <td><a href="mailto:web.to.plex@gmail.com">e-mail</a></td>
+                    <td><a href="faq">FAQs</a></td>
+                </tr>
+                <tr>
+                    <!-- Sub-Titles -->
+                    <td><a href="https://github.com/SpaceK33z/web-to-plex/">Source Code</a></td>
+                    <td><a href="https://github.com/SpaceK33z/web-to-plex/wiki/">Wiki</a></td>
+                    <td><a href="https://github.com/webtoplex/">@webtoplex</a></td>
+                    <td><a href="privacy">Privacy Policy</a></td>
+                </tr>
+                <tr>
+                    <!-- Sub-Titles -->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="terms">Terms of Service</a></td>
+                </tr>
+            </table>
+        </footer>
+    </div>
+
+    <!-- Run after completion -->
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>

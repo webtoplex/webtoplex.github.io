@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+html {
+    line-height: 1.15;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+article, aside, details, footer, header, menu, nav, section {
+    display: block;
+}
+
+hr {
+    box-sizing: content-box;
+}
+
+code, kbd, pre, samp {
+    font-family: monospace;
+    font-size: 1em;
+}
+
+a {
+    background-color: #0000;
+    -webkit-text-decoration-skip: objects;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+img {
+    border-style: none;
+}
+
+button, input, select, textarea {
+    font-family: Arial, sans-serif, monospace;
+    font-size: 100%;
+    line-height: 1.15;
+
+    margin: 0;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, [type="button"i], [type="submit"i], [type="reset"i] {
+    -webkit-appearance: button;
+}
+
+button::-moz-focus-inner, [type="button"i]::-moz-focus-inner, [type="submit"i]::-moz-focus-inner, [type="reset"i]::-moz-focus-inner {
+    border-style: none;
+
+    padding: 0;
+}
+
+button:-moz-focusring, [type="button"i]:-moz-focusring, [type="submit"i]:-moz-focusring, [type="reset"i]:-moz-focusring {
+    outline: ButtonText dotted 1px;
+}
+
+textarea {
+    overflow: auto;
+}
+
+summary {
+    display: list-item;
+}

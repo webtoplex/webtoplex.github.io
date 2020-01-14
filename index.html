@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="" />
+    <title>Web to Plex</title>
+
+    <meta charset="utf-8"/>
+    <meta name="theme-color" content="#F34245"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="A website for the Web to Plex extension."/>
+
+    <link rel="shortcut icon" href="icon/48.png"/>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+</head>
+<body>
+    <div id="main-container">
+        <!-- Header -->
+        <header>
+            <left>
+                <a href="/"><img id="icon" src="image/logo.png" height="40px"/></a>
+            </left>
+            <right>
+                <a class="button" href="#install">Install</a>
+            </right>
+        </header>
+
+        <!-- First section, welcoming message(s) -->
+        <section id="welcome">
+            <h1>Web to Plex</h1>
+
+            <span grey>Search your <a href="https://www.plex.tv/downloads/" orange>Plex Media Server</a> online.</span>
+        </section>
+
+        <!-- Getting started -->
+        <section id="getting-started" black -light-grey>
+            <h3>Getting started</h3>
+            <table>
+                <tr>
+                    <!-- Badges -->
+                    <td><img badge src="image/get-plex.png"/></td>
+                    <td><img badge src="image/get-web-to-plex.png"/></td>
+                    <td><img badge src="image/enjoy.png"/></td>
+                </tr>
+                <tr>
+                    <!-- Captions  -->
+                    <td>1. Get <a href="https://www.plex.tv/downloads/" orange>Plex</a> for your device.</td>
+                    <td>2. Install <a href="#install" orange>Web to Plex</a>.</td>
+                    <td>3. Enjoy your new browsing experience.</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Why Web to Plex? -->
+        <section id="why-web-to-plex" black>
+            <h3>Why Web to Plex?</h3>
+            <p>
+                Web to Plex searches your Plex Media Server(s) for matching media on sites lime <a href="https://imdb.com/" orange>IMDb</a>,
+                letting you immediately open the Movie or TV Show on Plex (if available). If the item isn't found on Plex, you'll be given the option to download or send the item to a supported manager.
+            </p>
+
+            <img inline src="image/example-on-device.png"/>
+        </section>
+
+        <!-- Installation links -->
+        <section id="install" black -light-grey>
+            <h3>Install Web to Plex</h3>
+            <a class="install button" href="https://chrome.google.com/webstore/detail/web-to-plex/cbpdknicmfolbdpakjihphblioajkcfl" white -black ::dark-grey>
+                <img width=32px src="icon/chrome.png"/>
+                <div content>
+                    <label for="chrome-version" orange>Chrome</label>
+                    <div id="chrome-version">Version 4.1.1.9</div>
+                </div>
+            </a>
+            <a class="install button" href="https://addons.mozilla.org/en-US/firefox/addon/web-2-plex/" white -black ::dark-grey>
+                <img width=32px src="icon/firefox.png"/>
+                <div content>
+                    <label for="firefox-version" orange>Firefox</label>
+                    <div id="firefox-version">Version 4.1.1.9</div>
+                </div>
+            </a>
+            <a class="install button" href="https://microsoftedge.microsoft.com/addons/detail/njkjmenckbpknhnepepbiikcjeboooon" white -black ::dark-grey>
+                <img width=32px src="icon/edge.png"/>
+                <div content>
+                    <label for="edge-version" orange>Edge</label>
+                    <div id="edge-version">Version 4.1.1.9</div>
+                </div>
+            </a><br>
+            <p>
+                By downloading this software, you accept the <a href="terms" orange>Terms of Service</a> and conditions.
+            </p>
+        </section>
+
+        <!-- External links -->
+        <section id="external" white -orange>
+            <table>
+                <tr>
+                    <!-- Title -->
+                    <td h3>GitHub</td>
+                    <td h3>Chrome WebStore</td>
+                    <td h3>Firefox Addons</td>
+                    <td h3>Microsoft Addons</td>
+                </tr>
+                <tr>
+                    <!-- Sub-Title -->
+                    <td h4><a href="https://github.com/SpaceK33z/web-to-plex/issues/" target="_blank" :black>Open issues</a></td>
+                    <td h4>Reviews</td>
+                    <td h4>Reviews</td>
+                    <td h4>Reviews</td>
+                </tr>
+                <tr>
+                    <!-- Content -->
+                    <td h2 id="github-open">N/A</td>
+                    <td h2>4.5</td>
+                    <td h2>3.8</td>
+                    <td h2>N/A</td>
+                </tr>
+                <tr>
+                    <!-- Ratings -->
+                    <td></td>
+                    <td rating="4.5"></td>
+                    <td rating="3.8"></td>
+                    <td rating="5.0"></td>
+                </tr>
+                <tr>
+                    <!-- Ratings -->
+                    <td id="github-total"></td>
+                    <td>24 reviews</td>
+                    <td>6 reviews</td>
+                    <td>0 reviews</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer grey -black>
+            <table>
+                <tr>
+                    <!-- Titles -->
+                    <td h4 white><a href="#">Downloads</a></td>
+                    <td h4 white><a href="#">Support</a></td>
+                    <td h4 white><a href="#">Contact</a></td>
+                    <td h4 white><a href="#">Information</a></td>
+                </tr>
+                <tr>
+                    <!-- Sub-Titles -->
+                    <td><a href="https://www.plex.tv/media-server-downloads/">Plex Media Serer</a></td>
+                    <td><a href="https://github.com/SpaceK33z/web-to-plex/">GitHub</a></td>
+                    <td><a href="mailto:web.to.plex@gmail.com">e-mail</a></td>
+                    <td><a href="faq">FAQs</a></td>
+                </tr>
+                <tr>
+                    <!-- Sub-Titles -->
+                    <td><a href="https://github.com/SpaceK33z/web-to-plex/">Source Code</a></td>
+                    <td><a href="https://github.com/SpaceK33z/web-to-plex/wiki/">Wiki</a></td>
+                    <td><a href="https://github.com/webtoplex/">@webtoplex</a></td>
+                    <td><a href="privacy">Privacy Policy</a></td>
+                </tr>
+                <tr>
+                    <!-- Sub-Titles -->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="terms">Terms of Service</a></td>
+                </tr>
+            </table>
+        </footer>
+    </div>
+
+    <!-- Run after completion -->
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>

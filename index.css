@@ -1,0 +1,397 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "Plex";
+    src: url(font/Plex.woff2) format('woff2'),
+        url(font/Plex.woff2) format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Plex-bold";
+    src: url(font/Plex.bold.woff2) format('woff2'),
+        url(font/Plex.bold.woff) format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@import url(css/reset.css);
+@import url(css/animate.css);
+
+:root {
+    --black:      #282a2dff;
+    --dark-grey:  #666666ff;
+    --light-grey: #f9f9f9ff;
+    --grey:       #ffffffb3;
+    --orange:     #e5a00dff;
+    --white:      #ffffffff;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    color: var(--light-grey);
+    font-family: "Plex";
+    text-align: center;
+}
+
+[black] {
+    color: var(--black) !important;
+}
+
+[dark-grey] {
+    color: var(--dark-grey) !important;
+}
+
+[light-grey] {
+    color: var(--light-grey) !important;
+}
+
+[grey] {
+    color: var(--grey) !important;
+}
+
+[orange] {
+    color: var(--orange) !important;
+}
+
+[white] {
+    color: var(--white) !important;
+}
+
+[black\:] [href] {
+    color: var(--black) !important;
+}
+
+[dark-grey\:] [href] {
+    color: var(--dark-grey) !important;
+}
+
+[light-grey\:] [href] {
+    color: var(--light-grey) !important;
+}
+
+[grey\:] [href] {
+    color: var(--grey) !important;
+}
+
+[orange\:] [href] {
+    color: var(--orange) !important;
+}
+
+[white\:] [href] {
+    color: var(--white) !important;
+}
+
+[\:black]:hover {
+    color: var(--black) !important;
+}
+
+[\:dark-grey]:hover {
+    color: var(--dark-grey) !important;
+}
+
+[\:light-grey]:hover {
+    color: var(--light-grey) !important;
+}
+
+[\:grey]:hover {
+    color: var(--grey) !important;
+}
+
+[\:orange]:hover {
+    color: var(--orange) !important;
+}
+
+[\:white]:hover {
+    color: var(--white) !important;
+}
+
+[-black] {
+    background-color: var(--black) !important;
+}
+
+[-dark-grey] {
+    background-color: var(--dark-grey) !important;
+}
+
+[-light-grey] {
+    background-color: var(--light-grey) !important;
+}
+
+[-grey] {
+    background-color: var(--grey) !important;
+}
+
+[-orange] {
+    background-color: var(--orange) !important;
+}
+
+[-white] {
+    background-color: var(--white) !important;
+}
+
+[\:\:black]:hover {
+    background-color: var(--black) !important;
+}
+
+[\:\:dark-grey]:hover {
+    background-color: var(--dark-grey) !important;
+}
+
+[\:\:light-grey]:hover {
+    background-color: var(--light-grey) !important;
+}
+
+[\:\:grey]:hover {
+    background-color: var(--grey) !important;
+}
+
+[\:\:orange]:hover {
+    background-color: var(--orange) !important;
+}
+
+[\:\:white]:hover {
+    background-color: var(--white) !important;
+}
+
+[no-show] {
+    display: none !important;
+}
+
+left, right {
+    display: inline-block;
+}
+
+left {
+    float: left;
+
+    padding-left: 5em;
+}
+
+right {
+    float: right;
+
+    padding-right: 5em;
+}
+
+[left] {
+    text-align: left;
+}
+
+[right] {
+    text-align: right;
+}
+
+[center] {
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6, [h1], [h2], [h3], [h4], [h5], [h6] {
+    font-family: "Plex-bold";
+}
+
+h1, [h1] {
+    font-size: 400%;
+}
+
+h2, [h2] {
+    font-size: 300%;
+}
+
+h3, [h3] {
+    font-size: 200%;
+}
+
+h4, [h4] {
+    font-size: 100%;
+}
+
+h5, [h5] {
+    font-size: 75%;
+}
+
+h6, [h6] {
+    font-size: 50%;
+}
+
+table {
+    align-content: center;
+
+    padding: 2em;
+
+    width: 100%;
+}
+
+a {
+    color: var(--white);
+    word-wrap: break-word;
+    text-decoration: none;
+
+    transition: all 0.3s;
+}
+
+code, pre {
+    background: var(--black);
+    border-radius: 3px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: var(--white);
+    font-family: "System, Monospace, Menlo, Arial", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 70%;
+    line-height: 1;
+    white-space: pre;
+
+    margin: 0 !important;
+    padding: 0.2em 0.4em !important;
+}
+
+a[target]:before {
+    content: '\22c4';
+}
+
+a:not(.button):hover {
+    color: var(--orange);
+}
+
+a.install {
+    background: var(--white);
+    display: inline-flex;
+
+    padding: 1em 5em;
+}
+
+a.install:hover {
+    background: var(--light-grey);
+    cursor: pointer;
+}
+
+p {
+    padding: 0 20em 5em;
+}
+
+button, .button, [type="button"i] {
+    background: var(--orange);
+    border: 0;
+    border-radius: 1000px;
+    color: var(--white);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    outline: 0;
+    text-rendering: optimizeLegibility;
+
+    margin-top: 3em;
+    padding: 1em 2em 1em;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+button:hover, .button:hover, [type="button"i]:hover {
+    opacity: 0.9;
+}
+
+img[badge] {
+    max-width: 150px;
+}
+
+img[inline] {
+    max-width: 80vw;
+}
+
+header [href="#install"i] {
+    padding: 0.5em 2em;
+}
+
+.install > img {
+    display: inline-block;
+
+    margin-left: -3em;
+}
+
+.install > [content] {
+    text-align: left;
+
+    padding-left: 1em;
+}
+
+.star.icon {
+    max-width: 1em;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ol[top] {
+    text-align: left;
+
+    padding: 0 20em 10em;
+}
+
+ol > li {
+    font-weight: bold;
+}
+
+ol > ol > li {
+    font-weight: normal;
+}
+
+li[for], ol:not([top]) {
+    padding-bottom: 1em;
+}
+
+li[for]:before {
+    content: attr(for) ".";
+    text-decoration: underline;
+}
+
+header {
+    align-items: center;
+    background: #0008;
+
+    padding: 2em 0 0;
+    position: absolute;
+    top: 0;
+
+    height: 4em;
+    width: 100%;
+}
+
+#main-container {
+    height: 100%;
+    width: 100%;
+}
+
+#icon {
+    margin: -0.5em 0 0;
+}
+
+#welcome {
+    background: url("image/noise.png") fixed, url("image/welcome.png") fixed center / cover no-repeat;
+    background-attachment: scroll;
+
+    padding-top: 7.25em;
+
+    height: 100%;
+}
+
+#welcome ~ * {
+    padding-bottom: 3em;
+    padding-top: 2em;
+    margin-top: -2em;
+}
+
+footer {
+    text-align: left;
+
+    padding: 2em 10em 3em;
+}
