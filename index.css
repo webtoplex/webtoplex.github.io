@@ -43,6 +43,10 @@ body {
     text-align: center;
 }
 
+body[footer] {
+    overflow: hidden;
+}
+
 [black] {
     color: var(--black) !important;
 }
@@ -384,7 +388,7 @@ header {
     height: 100%;
 }
 
-#welcome ~ * {
+#welcome ~ *:not(:last-child) {
     padding-bottom: 3em;
     padding-top: 2em;
     margin-top: -2em;
@@ -394,4 +398,15 @@ footer {
     text-align: left;
 
     padding: 2em 10em 3em;
+}
+
+iframe {
+    border: 0;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    height: 15em;
+    width: 100%;
 }
