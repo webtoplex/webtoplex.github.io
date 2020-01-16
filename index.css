@@ -258,7 +258,7 @@ code, pre {
     padding: 0.2em 0.4em !important;
 }
 
-a[target]:before {
+a[target]:not([target="_top"]):before {
     content: '\22c4';
 }
 
