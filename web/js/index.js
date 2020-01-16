@@ -302,7 +302,7 @@ $('#logout').onmouseup = event => {
 if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker
-            .register('/web.to.plex/service-worker.js', { scope: '.' })
+            .register('/web/service-worker.js', { scope: '.' })
             .then(worker => {
                 // Success
                 console.log(`Service Worker registered [${ worker.scope }]:`, worker);
