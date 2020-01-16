@@ -23,6 +23,8 @@
             $('#github-total').forEach(tracker => {
                 let latest = issues[0];
 
+                if(!latest)
+                    return tracker.innerHTML = `<a href="${latest.repository_url}" title="No issues are open!" target="_blank" :black>No issues</a>`;
                 tracker.innerHTML = `<a href="${latest.html_url}" title="${latest.title}" target="_blank" :black>Latest Issue (#${latest.number})</a>`;
             });
         });
