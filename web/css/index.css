@@ -1,0 +1,350 @@
+html, body {
+    background: url("../img/noise.png") fixed, linear-gradient(#CC7B19, #F34245);
+    font-family: noto, noto sans, roboto, roboto sans, sans-serif, monospace;
+    outline: none;
+
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+
+    height: 100%;
+    width: 100%;
+}
+
+/* Head */
+#head {
+    background: #0008;
+    border-bottom: 1px solid #000;
+    color: #FFF;
+    font-size: 28px;
+    text-align: center;
+
+    position: absolute;
+    top: 0;
+
+    height: 10%;
+    width: 100%;
+}
+
+#head > * {
+    vertical-align: middle;
+}
+
+#info {
+    font-size: 24px;
+}
+
+#meta {
+    color: #FFF8;
+    font-size: 50%;
+}
+
+#meta > *:not(:first-child):before {
+    content: "\2022  "; /* 2014 dash, 2022 bullet, 2023 triangle, 2044 forward slash */
+    color: #FFF8;
+}
+
+#rating, .rating {
+    border: 1px solid;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: inline-block;
+    text-transform: uppercase;
+
+    line-height: 100%;
+
+    max-height: 50%;
+    padding: 1px 3px 0;
+}
+
+.rating:empty {
+    display: none;
+}
+
+#logout, #back {
+    cursor: pointer;
+
+    position: absolute;
+    right: 1%;
+    top: 1%;
+}
+
+#back {
+    display: flex;
+
+    left: 1%;
+    right: unset;
+}
+
+/* Body */
+#body {
+    background: #0008;
+    border-top: 1px solid #000;
+
+    position: absolute;
+    top: 10%;
+
+    height: 79.74% !important;
+    width: 100%;
+}
+
+#body[description]:after {
+    content: attr(description);
+
+    background: #0008;
+    color: #fff;
+    text-align: left;
+    text-indent: 3%;
+    text-shadow: 0 0 3px #000;
+
+    left: 28%;
+    padding: 1%;
+    position: absolute;
+
+    height: 95.125%;
+    width: 70%;
+}
+
+#id {
+    font-family: monospace;
+    font-size: 12px;
+    text-align: center;
+    text-shadow: 0 0 5px #000;
+
+    margin-left: calc(50% - 250px);
+    z-index: 9;
+
+    width: 500px;
+}
+
+#id > * {
+    color: #FFF;
+    outline: none;
+    text-decoration: none;
+}
+
+
+#id > *:not(:first-child):before {
+    content: "\2022  ";
+    color: #FFF8;
+}
+
+#id > *:empty:after {
+    content: "N/A";
+    color: #FFF8;
+    cursor: not-allowed;
+}
+
+.icon {
+    height: 16px !important;
+    width: 16px !important;
+
+    margin: -4px;
+    padding-right: 6px;
+}
+
+#frame {
+    border: 1px solid #0000;
+    outline: none;
+
+    position: absolute;
+    right: 0%;
+    top: -0.125%;
+    z-index: 3;
+
+    height: 100%;
+    width: 72%;
+}
+
+#similar {
+    color: #ffffff80;
+    overflow: auto;
+
+    left: 0;
+    position: absolute;
+    top: 0;
+
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+    width: 28%;
+}
+
+#similar > *:nth-child(even), #search + label > *:nth-child(even) {
+    background-color: #0001 !important;
+}
+
+#similar > *:hover {
+    color: #fff;
+
+    transition: all 0.1s;
+}
+
+*:not(#id) a {
+    color: inherit;
+    text-decoration: inherit;
+    text-shadow: 0 0 3px #0008;
+}
+
+/* Foot */
+#foot {
+    background: #0008;
+    border-top: 1px solid #000;
+
+    bottom: 0;
+    position: absolute;
+
+    height: 10%;
+    width: 100%;
+}
+
+#foot button {
+    background: #F34245;
+    border: 1px solid #0008;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+
+    bottom: 13%;
+    position: absolute;
+
+    height: 75%;
+    width: 15%;
+
+    transition: all 0.25s ease-in-out;
+}
+
+#foot button:hover {
+    background: #E33235;
+}
+
+#foot button[active] {
+    background: #D32225;
+}
+
+#foot button:first-of-type {
+    left: 67%;
+}
+
+#foot button:last-of-type {
+    right: 1%;
+}
+
+input[type="text"], input[type="password"], input[type] + label[for] {
+    background: #ffffff80;
+    border: 3px solid #0000;
+    border-radius: 3px;
+    color: #0008;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+
+    height: 45%;
+    width: 35%;
+    line-height: 1.5em;
+
+    margin: 0;
+    padding: 6px 12px;
+
+    left: 28%;
+    position: absolute;
+    vertical-align: middle;
+    top: 15%;
+
+    transition: background 0.2s;
+}
+
+input[type="text"] + input, input[type="password"] + input {
+    margin-top: 6%;
+}
+
+input:valid:not(:placeholder-shown), input[valid="true"] {
+    background: #40ff4080;
+}
+
+input:not(:valid), input[valid="false"] {
+    background: #ff404080 !important;
+}
+
+input[type] + label[for] {
+    background: #fff;
+    display: none;
+    overflow: auto;
+
+    bottom: 85%;
+    top: -350%;
+
+    height: auto;
+}
+
+input[type]:valid:not(:placeholder-shown) + label[for] {
+    display: initial;
+}
+
+#results {
+    z-index: 6;
+}
+
+#results:empty:before {
+    content: 'Enter a title to search...';
+
+    color: #6668;
+    display: block;
+    text-align: center;
+
+    margin-top: 25%;
+}
+
+#results a {
+    display: block;
+    overflow: hidden;
+    text-shadow: none !important;
+}
+
+#results .overview {
+    color: #6664;
+
+    height: 75%;
+    width: calc(100% - 100px);
+}
+
+/* Miscellaneous */
+#poster {
+    display: none;
+}
+
+#loading {
+    transition: all 0.5s;
+
+    left: calc(64% - 24px);
+    position: absolute;
+    top: calc(50% - 24px);
+}
+
+[loading] {
+    transition: all 0.5s;
+}
+
+[loading=true], iframe[loading=false] {
+    opacity: 1;
+}
+
+[loading=false], iframe[loading=true] {
+    opacity: 0;
+}
+
+*::-webkit-scrollbar {
+    background: #000;
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #0000;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #FFF8;
+}

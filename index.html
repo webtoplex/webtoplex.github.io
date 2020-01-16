@@ -15,14 +15,18 @@
 <body>
     <div id="main-container">
         <!-- Header -->
-        <header>
-            <left>
-                <a href="/"><img id="icon" src="image/logo.png" height="40px"/></a>
-            </left>
-            <right>
-                <a class="button" href="#install">Install</a>
-            </right>
-        </header>
+        <iframe head src="header.html">
+            <!-- Backup header -->
+            <header>
+                <left>
+                    <a href="/"><img id="icon" src="image/logo.png" height="40px"/></a>
+                </left>
+                <right>
+                    <a class="button" href="web/">Web App</a>
+                    <a class="button" href="#install">Download</a>
+                </right>
+            </header>
+        </iframe>
 
         <!-- First section, welcoming message(s) -->
         <section id="welcome">
@@ -132,7 +136,7 @@
         </section>
 
         <!-- Footer -->
-        <iframe src="footer.html">
+        <iframe foot src="footer.html">
             <!-- Backup footer -->
             <table>
                 <tr>

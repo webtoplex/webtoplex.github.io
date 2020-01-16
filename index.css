@@ -43,7 +43,7 @@ body {
     text-align: center;
 }
 
-body[footer] {
+body[footer], body[header] {
     overflow: hidden;
 }
 
@@ -311,7 +311,7 @@ img[inline] {
     max-width: 80vw;
 }
 
-header [href="#install"i] {
+header [type="button"] {
     padding: 0.5em 2em;
 }
 
@@ -383,6 +383,7 @@ header {
     background: url("image/noise.png") fixed, url("image/welcome.png") fixed center / cover no-repeat;
     background-attachment: scroll;
 
+    margin-top: -0.25em;
     padding-top: 7.25em;
 
     height: 100%;
@@ -407,6 +408,13 @@ iframe {
     margin: 0;
     padding: 0;
 
-    height: 15em;
     width: 100%;
+}
+
+iframe[head] {
+    height: 5em;
+}
+
+iframe[foot] {
+    height: 15em;
 }
