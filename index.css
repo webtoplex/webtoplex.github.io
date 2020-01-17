@@ -360,7 +360,7 @@ li[for]:before {
 
 header {
     align-items: center;
-    background: #0008;
+    background: var(--black);
 
     padding: 2em 0 0;
     position: absolute;
