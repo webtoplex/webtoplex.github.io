@@ -398,7 +398,7 @@ header {
 footer {
     text-align: left;
 
-    padding: 2em 10em 3em;
+    padding: 0em 10em 5em;
 }
 
 iframe {
@@ -417,4 +417,8 @@ iframe[head] {
 
 iframe[foot] {
     height: 15em;
+}
+
+header, footer {
+    background-image: url(image/noise.png);
 }
