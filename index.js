@@ -31,13 +31,13 @@
 
     /* Update the rating counters */
     $('[rating]').forEach(rating => {
-        let value = eval(rating.getAttribute('rating')),
+        let value = parseFloat(rating.getAttribute('rating')),
             stars = [];
 
         if(!value)
             return;
 
-        for(;value >= 1 && stars.length < 5; value--)
+        for(;value >= 1 && stars.length < 5; value -= 1.0)
             stars.push('full');
         for(;value >= 0.5 && stars.length < 5; value -= 0.5)
             stars.push('half');
