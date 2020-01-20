@@ -1,3 +1,5 @@
+let storage = localStorage || sessionStorage;
+
 (async() => {
     let $ = (selector, container = document) => [...container.querySelectorAll(selector)];
 
@@ -9,13 +11,8 @@
     });
 
     /* Update the GitHub issue counter(s) */
-    let GitHubIssues;
-
-    await fetch('https://api.github.com/repos/SpaceK33z/web-to-plex/issues?state=open')
-        .then(response => response.json())
-        .then(issues => {
-            GitHubIssues = issues;
-
+    let GitHubIssues = storage.getItem('GitHubIssues'),
+        UpdateIssueTrackers = issues => {
             $('#github-open').forEach(tracker => {
                 tracker.innerHTML = issues.length;
             });
@@ -27,7 +24,18 @@
                     return tracker.innerHTML = `<a href="${latest.repository_url}" title="No issues are open!" target="_blank" :black>No issues</a>`;
                 tracker.innerHTML = `<a href="${latest.html_url}" title="${latest.title}" target="_blank" :black>Latest Issue (#${latest.number})</a>`;
             });
-        });
+        };
+
+    if(!GitHubIssues)
+        await fetch('https://api.github.com/repos/SpaceK33z/web-to-plex/issues?state=open')
+            .then(response => response.json())
+            .then(issues => {
+                UpdateIssueTrackers(issues);
+
+                storage.setItem('GitHubIssues', JSON.stringify(issues));
+            });
+    else
+        UpdateIssueTrackers(JSON.parse(GitHubIssues));
 
     /* Update the rating counters */
     $('[rating]').forEach(rating => {
