@@ -12,6 +12,7 @@ let storage = localStorage || sessionStorage;
 
     /* Update the GitHub issue counter(s) */
     let GitHubIssues = storage.getItem('GitHubIssues'),
+        GitHubIssuesDate = +storage.getItem('GitHubIssuesDate') || 0,
         UpdateIssueTrackers = issues => {
             $('#github-open').forEach(tracker => {
                 tracker.innerHTML = issues.length;
@@ -26,13 +27,14 @@ let storage = localStorage || sessionStorage;
             });
         };
 
-    if(!GitHubIssues)
+    if(!GitHubIssues || (GitHubIssuesDate + 3600000) < +(new Date))
         await fetch('https://api.github.com/repos/SpaceK33z/web-to-plex/issues?state=open')
             .then(response => response.json())
             .then(issues => {
                 UpdateIssueTrackers(issues);
 
                 storage.setItem('GitHubIssues', JSON.stringify(issues));
+                storage.setItem('GitHubIssuesDate', +(new Date));
             });
     else
         UpdateIssueTrackers(JSON.parse(GitHubIssues));
