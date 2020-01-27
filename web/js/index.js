@@ -258,12 +258,64 @@ $('#search').addEventListener('keyup', event => {
         clearTimeout(searching);
 
     let type = $('#info').getAttribute('type'),
-        query = $('#search').value;
+        query = $('#search').value,
+        Query = [];
+
+    query = query.replace(/\s*(adult:(?:(?:inc|exc)(?:lude)?|true|false|yes|no)|lang(?:uage)?:[a-z]{2}-[A-Z]{2}|region:[A-Z]{2}|year:\d{4})\s*/ig, ($0, $1, $$, $_) => {
+        let [property, value] = $1.split(':', 2),
+            _l = 'toLowerCase',
+            _U = 'toUpperCase';
+
+        property = property[_l]();
+
+        if(type == 'movie')
+            switch(property) {
+                case 'adult':
+                    property = 'include_adult';
+                    value = /^(inc(?:lude)?|true|yes)$/i.test(value);
+                    break;
+
+                case 'language':
+                case 'lang':
+                    property = 'language';
+                    value = value.split('-').map((v, i, a) => i? v[_U](): v[_l]()).join('-');
+                    break;
+
+                case 'region':
+                    value = value[_U]();
+                    break;
+
+                case 'year':
+                    break;
+
+                default: return;
+            }
+        else /* type == 'tv' */
+            switch(property) {
+                case 'language':
+                case 'lang':
+                    property = 'language';
+                    value = value.split('-').map((v, i, a) => i? v[_U](): v[_l]()).join('-');
+                    break;
+
+                case 'year':
+                    property = 'first_air_date_year';
+                    break;
+
+                default: return;
+            };
+
+        Query.push(`${ property }=${ value }`);
+
+        return '';
+    });
+
+    Query.push(`query=${encodeURIComponent(query)}`);
 
     searching = setTimeout(async() => {
         $('#results').innerHTML = '';
 
-        await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${apikey}&query=${encodeURIComponent(query)}`)
+        await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${apikey}&${ Query.join('&') }`)
             .then(r => r.json())
             .then(json => {
                 let { results } = json,
