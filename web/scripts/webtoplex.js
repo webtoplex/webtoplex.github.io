@@ -1,10 +1,10 @@
 // optional
-// "Web to Plex" requires: api, token
+// "Web to Plex" requires: api
 // 'Friendly Name' requires permissions...
 
 let script = {
 	// required
-	"url": "*://webtoplex.github.io/web/(?!test|login)",
+	"url": "*://(ephellon|webtoplex).github.io/web[\\w\\.]*/(?!test|login)",
 	// Example: *://*.amazon.com/*/video/(detail|buy)/*
 	// *://         - match any protocol (http, https, etc.)
 	// *.amazon.com - match any sub-domain (www, ww5, etc.)
@@ -35,7 +35,7 @@ let script = {
 		return { type, title, year, image, IMDbID, TMDbID };
 	},
 
-	// optional | functioanlity only
+	// optional | functionality only
 	"getType": () => ($('#info').first.getAttribute('type') == 'movie'? 'movie': 'show'),
 
 	"getID": (provider) => $(`#${provider}`).first.textContent,
@@ -54,4 +54,4 @@ setTimeout(() => {
 		return -1;
 		// don't run on the login page
 	}
-}, 100);
+}, 1000);
