@@ -24,7 +24,7 @@
                 </left>
                 <right>
                     <a class="button" href="web/">Web App</a>
-                    <a class="button" href="#install">Download</a>
+                    <a class="button" href="#installation">Download</a>
                 </right>
             </header>
         </iframe>
@@ -48,11 +48,13 @@
                 </tr>
                 <tr>
                     <!-- Captions  -->
-                    <td>1. Get <a href="https://www.plex.tv/downloads/" orange>Plex</a> for your device.</td>
-                    <td>2. Install <a href="#install" orange>Web to Plex</a>.</td>
+                    <td>1. Get <a href="https://www.plex.tv/downloads/" orange>Plex</a> for your device.<em>*</em></td>
+                    <td>2. Install <a href="#installation" orange>Web to Plex</a>.</td>
                     <td>3. Enjoy your new browsing experience.</td>
                 </tr>
             </table>
+
+            <em>* This step is optional.</em>
         </section>
 
         <!-- Why Web to Plex? -->
@@ -67,36 +69,99 @@
         </section>
 
         <!-- Installation links -->
-        <section id="install" black -light-grey>
+        <section id="installation" black -light-grey>
             <h3>Install Web to Plex</h3>
-            <a class="install button" href="https://chrome.google.com/webstore/detail/web-to-plex/cbpdknicmfolbdpakjihphblioajkcfl" white -black ::dark-grey>
-                <img width=32px src="icon/chrome.png"/>
-                <div content>
-                    <label for="chrome-version" orange>Chrome</label>
-                    <div id="chrome-version"></div>
-                </div>
-            </a>
-            <a class="install button" href="https://addons.mozilla.org/en-US/firefox/addon/web-2-plex/" white -black ::dark-grey>
-                <img width=32px src="icon/firefox.png"/>
-                <div content>
-                    <label for="firefox-version" orange>Firefox</label>
-                    <div id="firefox-version"></div>
-                </div>
-            </a>
-            <a class="install button" href="https://microsoftedge.microsoft.com/addons/detail/njkjmenckbpknhnepepbiikcjeboooon" white -black ::dark-grey>
-                <img width=32px src="icon/edge.png"/>
-                <div content>
-                    <label for="edge-version" orange>Edge</label>
-                    <div id="edge-version"></div>
-                </div>
-            </a>
-            <a class="install button" href="https://addons.opera.com/extensions/details/web-to-plex/" white -black ::dark-grey>
-                <img width=32px src="icon/opera.png"/>
-                <div content>
-                    <label for="opera-version" orange>Opera</label>
-                    <div id="opera-version"></div>
-                </div>
-            </a><br>
+
+            <div id="install" source="storefront">
+                <table>
+                    <tr id="sources">
+                        <td><a class="source" href="#installation" value="storefront">Storefront</a></td>
+                        <td><a class="source" href="#installation" value="github">GitHub</a></td>
+                    </tr>
+
+                    <!-- Storefront -->
+                    <tr source="Storefront" version>
+                        <td>
+                            <a class="install button" href="https://chrome.google.com/webstore/detail/web-to-plex/cbpdknicmfolbdpakjihphblioajkcfl" white -black ::dark-grey>
+                                <img width=32px src="icon/chrome.png"/>
+                                <div content>
+                                    <label for="chrome-version" orange>Chrome</label>
+                                    <div id="chrome-version">v4.1.1.9</div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="install button" href="https://addons.mozilla.org/en-US/firefox/addon/web-2-plex/" white -black ::dark-grey>
+                                <img width=32px src="icon/firefox.png"/>
+                                <div content>
+                                    <label for="firefox-version" orange>Firefox</label>
+                                    <div id="firefox-version"></div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="install button" href="https://microsoftedge.microsoft.com/addons/detail/njkjmenckbpknhnepepbiikcjeboooon" white -black ::dark-grey>
+                                <img width=32px src="icon/edge.png"/>
+                                <div content>
+                                    <label for="edge-version" orange>Edge</label>
+                                    <div id="edge-version">v4.1.1.11</div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="install button" href="https://addons.opera.com/extensions/details/web-to-plex/" white -black ::dark-grey>
+                                <img width=32px src="icon/opera.png"/>
+                                <div content>
+                                    <label for="opera-version" orange>Opera</label>
+                                    <div id="opera-version"></div>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <!-- GitHub -->
+                    <tr source="GitHub" version>
+                        <td>
+                            <a class="install button" href="https://github.com/webtoplex/browser-extension/blob/master/src.zip" white -black ::dark-grey>
+                                <img width=32px src="icon/chrome.png"/>
+                                <div content>
+                                    <label for="chrome-version" orange>Chrome</label>
+                                    <div id="chrome-version"></div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="install button" href="https://github.com/webtoplex/browser-extension/blob/master/moz.zip" white -black ::dark-grey>
+                                <img width=32px src="icon/firefox.png"/>
+                                <div content>
+                                    <label for="firefox-version" orange>Firefox</label>
+                                    <div id="firefox-version"></div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="install button" href="https://github.com/webtoplex/browser-extension/blob/master/win.zip" white -black ::dark-grey>
+                                <img width=32px src="icon/edge.png"/>
+                                <div content>
+                                    <label for="edge-version" orange>Edge</label>
+                                    <div id="edge-version"></div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="install button" href="https://github.com/webtoplex/browser-extension/blob/master/opa.zip" white -black ::dark-grey>
+                                <img width=32px src="icon/opera.png"/>
+                                <div content>
+                                    <label for="opera-version" orange>Opera</label>
+                                    <div id="opera-version"></div>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
             <p>
                 By downloading this software, you accept the <a href="terms" orange>Terms of Service</a> and conditions.
             </p>

@@ -26,6 +26,7 @@
     --light-grey: #f9f9f9ff;
     --grey:       #ffffffb3;
     --orange:     #e5a00dff;
+    --dark-white: #f2f3f4ff;
     --white:      #ffffffff;
 }
 
@@ -238,10 +239,15 @@ table {
 
 a {
     color: var(--white);
+    cursor: pointer;
     word-wrap: break-word;
     text-decoration: none;
 
     transition: all 0.3s;
+}
+
+a * {
+    cursor: inherit;
 }
 
 code, pre {
@@ -288,6 +294,7 @@ button, .button, [type="button"i] {
     border: 0;
     border-radius: 1000px;
     color: var(--white);
+    cursor: pointer;
     font-weight: 400;
     font-style: normal;
     line-height: 1;
@@ -394,6 +401,84 @@ header {
     padding-bottom: 3em;
     padding-top: 2em;
     margin-top: -2em;
+}
+
+#install > * {
+    background: var(--white) !important;
+    border: 1px solid var(--light-grey) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 0 60px 0 rgba(0,0,0,.05);
+    box-sizing: border-box !important;
+    display: flex !important;
+
+    margin: 0 8% !important;
+
+    width: 84% !important;
+}
+
+#install tbody {
+    width: 100% !important;
+}
+
+#install [source] {
+    display: none !important;
+
+    padding: 0 8% !important;
+}
+
+#install [source]::before {
+    content: attr(source) " (" attr(version) ")";
+    display: block;
+    font-size: 3em;
+
+    margin-top: 3%;
+}
+
+#install[source="storefront"i] [value="storefront"i], #install[source="github"i] [value="github"i] {
+    background: var(--dark-white) !important;
+}
+
+#install[source="storefront"i] [source="storefront"i], #install[source="github"i] [source="github"i] {
+    display: block !important;
+}
+
+#sources {
+    display: inline-block !important;
+
+    width: 100% !important;
+}
+
+#sources > * {
+    display: inline-block !important;
+
+    width: 200px !important;
+}
+
+#sources > *:not(:first-child) {
+    margin-left: 2%;
+}
+
+.source {
+    border: 1px solid var(--dark-grey) !important;
+    background: var(--white) !important;
+    display: inline-block !important;
+    color: var(--black) !important;
+    cursor: pointer !important;
+
+    padding: 16px 16px 17px !important;
+
+    width: 100% !important;
+}
+
+#sources > *:first-child .source {
+    border-top-left-radius: 3px !important;
+    border-bottom-left-radius: 3px !important;
+    border-right: 0 !important;
+}
+
+#sources > *:last-child .source {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 footer {

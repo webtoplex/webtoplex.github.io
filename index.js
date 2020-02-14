@@ -30,8 +30,13 @@ let storage = localStorage || sessionStorage;
             await fetch('https://api.github.com/repos/webtoplex/browser-extension/releases/latest')
     			.then(response => response.json())
     			.then(version => {
+                    version = version.tag_name.replace(/^(v[\d\.]+)[^]*$/, '$1');
+
                     for(let element of $('[id$="-version"i]'))
-                        element.innerHTML = version.tag_name.replace(/^(v[\d\.]+)[^]*$/, '$1');
+                        element.innerHTML = element.innerHTML || version;
+
+                    for(let element of $('#sources ~ *'))
+                        element.setAttribute('version', version);
                 });
         };
 
@@ -66,5 +71,13 @@ let storage = localStorage || sessionStorage;
 
         for(let size of stars)
             rating.innerHTML += `<img class="star icon" src="icon/${size}-star.png" />`;
+    });
+
+    $('#sources .source').forEach(source => {
+        source.addEventListener('click', event => {
+            event.preventDefault(true);
+
+            $('#install')[0].setAttribute('source', event.target.innerHTML);
+        });
     });
 })();
