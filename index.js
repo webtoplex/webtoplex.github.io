@@ -25,6 +25,14 @@ let storage = localStorage || sessionStorage;
                     return tracker.innerHTML = `<a href="${latest.repository_url}" title="No issues are open!" target="_blank" :black>No issues</a>`;
                 tracker.innerHTML = `<a href="${latest.html_url}" title="${latest.title}" target="_blank" :black>Latest Issue (#${latest.number})</a>`;
             });
+        },
+        GetMostRecentVersion = async() => {
+            await fetch('https://api.github.com/repos/webtoplex/browser-extension/releases/latest')
+    			.then(response => response.json())
+    			.then(version => {
+                    for(let element of $('[id$="-version"i]'))
+                        element.innerHTML = version.tag_name.replace(/^(v[\d\.]+)[^]*$/, '$1');
+                });
         };
 
     if(!GitHubIssues || (GitHubIssuesDate + 3600000) < +(new Date))
@@ -38,6 +46,8 @@ let storage = localStorage || sessionStorage;
             });
     else
         UpdateIssueTrackers(JSON.parse(GitHubIssues));
+
+    GetMostRecentVersion();
 
     /* Update the rating counters */
     $('[rating]').forEach(rating => {
