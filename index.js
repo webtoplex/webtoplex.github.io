@@ -44,6 +44,8 @@ let storage = localStorage || sessionStorage;
         await fetch('https://api.github.com/repos/SpaceK33z/web-to-plex/issues?state=open')
             .then(response => response.json())
             .then(issues => {
+                issues = issues.filter(issue => !issue.pull_request);
+
                 UpdateIssueTrackers(issues);
 
                 storage.setItem('GitHubIssues', JSON.stringify(issues));
