@@ -52,7 +52,7 @@ function comify(number = 0) {
 function modify({ type, title, year, similar, info }) {
     let object = { title, year, ...info };
 
-    document.title = `Web to Plex | ${title} (${year})`;
+    document.title = `Web to Plex \u2014 ${title} (${year})`;
 
     $('#info').setAttribute('type', type);
     $('#movie').removeAttribute('active');
