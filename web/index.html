@@ -14,49 +14,69 @@
     <link rel="manifest" href="manifest.json"/>
 </head>
 <body>
-    <div id="head">
-        <span id="back" title="Back to...">&larrfs;</span>
-        <div id="info" type="movie">
-            <span id="title">Movie</span>
-            (<span id="year">1970</span>)
-            <div id="meta">
-                <span id="rating">NR</span>
-                <span id="runtime">0:00</span>
-                <span id="genre">N/A</span>
-                <span id="release-date">January 1, 1970</span>
-                <span id="votes">0% (0 votes)</span>
-            </div>
-            <div id="id">
-                <a id="imdb" target="_blank"></a>
-                <a id="tmdb" target="_blank"></a>
-                <a id="yutb" target="frame"></a>
-                <a id="abou" target="frame" href="blank.html">about</a>
-            </div>
-        </div>
-        <span id="logout" title="Logout">&#x2718;</span>
-    </div>
+    <div id="head" type="movie">
+        <span id="left">
+            <span title="Movies"><i id="movie" class="material-icons">local_movies</i></span>
+            <span title="TV Shows"><i id="tv" class="material-icons">live_tv</i></span>
+            <span title="Go to a random movie"><i id="mix" class="material-icons">shuffle</i></span>
+        </span>
 
-    <div id="body">
-        <iframe id="frame" name="frame" srcdoc="<style>html,body{margin:0;padding:0;overflow:hidden}</style>">
-            Frames are not supported...
-        </iframe>
-
-        <ul id="similar"></ul>
-    </div>
-
-    <div id="foot">
         <span id="search-holder">
-            <input id="search" type="text" title="Underwater adult:no lang:en-US region:US year:2020" placeholder="search" autocomplete="off" autofill="off"/>
+            <input id="search" type="text" title="Underwater adult:no lang:en-US region:US year:2020" placeholder="Search..." autocomplete="off" autofill="off"/>
             <label id="results" for="search"></label>
         </span>
-        <button id="movie" active>Movies</button>
-        <button id="tv">TV Shows</button>
+
+        <span id="right">
+            <span id="close" title="Close player"><i class="material-icons">cancel_presentation</i></span>
+            <span id="logout" title="Logout"><i class="material-icons">exit_to_app</i></span>
+        </span>
+
+        <iframe id="frame" name="frame" in-use="false"></iframe>
     </div>
 
-    <img id="poster"/>
+    <div id="card">
+        <div id="data" type="movie">
+            <div id="header">
+                <img id="poster" />
 
-    <span id="loading" loading="false"><img src="img/48.png" /></span>
+                <h1 id="title">Movie</h1>
+                <h4 id="year">1970</h4>
+                <div id="meta">
+                    <span id="rating">N/R</span>
+                    <span id="runtime">0:00</span>
+                    <span id="genre">Action</span>
+                </div>
 
+                <div id="description">Movie description...</div>
+
+                <div id="share">
+                    <ul>
+                        <li title="Share"><a class="share" target="frame"><i class="material-icons">share</i></a></li>
+                        <li title="Like"><a class="like" target="frame"><i class="material-icons">favorite</i></a></li>
+                        <li title="Watch trailer"><a class="trailer" target="frame"><i class="material-icons">movie</i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="blur-effect"></div>
+    </div>
+
+    <div id="related" type="Movie"></div>
+
+    <div id="foot">
+        <a href="/">Web to Plex</a>
+        <a href="https://github.com/webtoplex/browser-extension/">GitHub</a>
+        <a href="mailto:web.to.plex@gmail.com">e-mail</a>
+        <a href="/faq">FAQs</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <p>
+            &copy; 2020 Web to Plex
+        </p>
+    </div>
+
+    <style id="after-effect"></style>
+    <script src="js/color-thief.js"></script>
     <script src="js/synq.js"></script>
     <script src="js/index.js"></script>
 </body>

@@ -32,7 +32,8 @@ let $ = selector => document.querySelector(selector),
         10766: "Soap Opera",
         10767: "Talk",
         10768: "War & Politics",
-    };
+    },
+    ColorPicker = new ColorThief;
 
 function comify(number = 0) {
     number = (number + '')
@@ -54,55 +55,171 @@ function modify({ type, title, year, similar, info }) {
 
     document.title = `Web to Plex \u2014 ${title} (${year})`;
 
-    $('#info').setAttribute('type', type);
-    $('#movie').removeAttribute('active');
-    $('#tv').removeAttribute('active');
-    $(`#${ type }`).setAttribute('active', true);
-    $('#yutb').innerHTML = `<img class=icon src="img/youtube.png"/>${object.trailer || 'not found'}`;
-    $('#yutb').setAttribute('href', !object.trailer? 'blank.html': `https://www.youtube.com/embed/${ object.trailer }`);
+    $('#data').setAttribute('type', type);
+
+    let SetDominantColor = (image, container = '#card', sample_size = 50) => {
+        let color = ColorPicker.getColor(image, sample_size),
+            palette = ColorPicker.getPalette(image, null, sample_size),
+            random_palette = [color, ...palette].sort(() => Math.random() - 0.5),
+            random = () => random_palette.pop(),
+            name = container.replace(/\W+/g, ''),
+            first;
+
+        $('#after-effect').innerHTML += `
+            /* Animate ${ container } */
+            ${ container } {
+                box-shadow: 0 0 100px -45px rgb(${ first = random() });
+            }
+
+            ${ container }:hover {
+                animation: color-${ name } 15s infinite;
+            }
+
+            @keyframes color-${ name } {
+                ${
+                    (() => {
+                        let values = [`0% { box-shadow: 0 0 100px -45px rgb(${ first }) }`];
+
+                        for(let random_color, index = 1, length = random_palette.length; index < length; index++) {
+                            random_color = random_palette.pop();
+
+                            values.push(`${ ((index / length) * 100) | 0 }% { box-shadow: 0 0 100px -45px rgb(${ random_color }) }`);
+                        }
+
+                        return values.join('\n                ');
+                    })()
+                }
+            }
+        `;
+    };
+
+    let maxWidth = (string = '', length = 40, placeholder = '...') => (string.length > length? string.slice(0, length - placeholder.length) + placeholder: string).replace(/\s*[\-\+\:\;\,\.\?\!]?\.{3}$/, '...');
+
+    // object.description = maxWidth(object.description, 250);
 
     let element;
     for(let key in object)
-        if(element = $(`#${ key }`))
-            if(/^[it]mdb$/i.test(key))
-                element.innerHTML = `<img class=icon src="img/${key}.png" />${object[key] || ''}`;
-            else
-                element.innerHTML = object[key] || '';
+        if(/^([it]mdb|tvdb)$/i.test(key)) {
+            $('#data').setAttribute(key, object[key]);
+        } else if(element = $(`#${ key }, .${ key }`)) {
+            let value = object[key];
 
-    let poster = `https://image.tmdb.org/t/p/original${ object.poster[0] }`;
-    $('body').setAttribute('style', `background: url("img/noise.png") fixed, url("${ poster }") fixed center / cover no-repeat;`);
-    $('#body').setAttribute('description', object.description || 'No description availabe');
-    $('#poster').setAttribute('src', `https://image.tmdb.org/t/p/original${object.poster[1]||'/'}`);
+            if(/^(poster)$/i.test(key)) {
+                element.crossOrigin = "Anonymous";
+                element.src = `https://image.tmdb.org/t/p/original${ value[1] || '/' }`;
+                $('#blur-effect').setAttribute('style', `background: url("img/noise.png") fixed, url("https://image.tmdb.org/t/p/original${ value[0] }") fixed center / cover no-repeat;`);
 
-    let { imdb, tmdb } = object,
-        ids = { imdb, tmdb },
-        tv = type == 'tv';
+                if(element.complete) {
+                    SetDominantColor(element);
+                } else {
+                    element.addEventListener('load', event => SetDominantColor(event.target));
+                }
+            } else if(/^(trailer)$/i.test(key)) {
+                element.href = `https://www.youtube.com/embed/${ value }`;
+            } else {
+                element.innerHTML = value.join? value.join('/'): value;
+            }
+        }
 
-    for(let id in ids)
-        $(`#${ id }`).setAttribute('href', (
-            object[id]?
-                id == 'tmdb'?
-                    `https://www.themoviedb.org/${type}/${object[id]}`:
-                `https://www.imdb.com/title/${object[id]}`:
-            ($(`#${ id }`).target = 'frame', 'blank.html')
-        ));
+    for(let item of similar.slice(0, 10)) {
+        /* item (movie)
+         *******************************
+         * adult: <boolean>
+         * backdrop_path: <string>
+         * genre_ids: <array>
+         * id: <integer>
+         * original_language: <string>
+         * original_title: <string>
+         * overview: <string>
+         * popularity: <float>
+         * poster_path: <string>
+         * release_date: <string>
+         * title: <string>
+         * video: <boolean>
+         * vote_average: <float>
+         * vote_count: <integer>
+         ********************************
+         * item (tv show)
+         ********************************
+         * backdrop_path: <string>
+         * first_air_date: <string>
+         * genre_ids: <array>
+         * id: <integer>
+         * name: <string>
+         * original_title: <array>
+         * original_language: <string>
+         * original_name: <string>
+         * overview: <string>
+         * popularity: <float>
+         * poster_path: <string>
+         * vote_average: <float>
+         * vote_count: <integer>
+         */
+        let { adult, backdrop_path, first_air_date, genre_ids, id, name, original_language, original_name, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count } = item,
+            year = parseInt(release_date || first_air_date),
+            controller_id = poster_path.replace(/\W+/g, '');
 
-    $('#similar').innerHTML = '';
+        let html = `
+            <a id="card_${ controller_id }" class="card" href="?${ type }=${ id }" title="${ original_title || original_name }">
+                <div class="data" type="${ type }">
+                    <div class="header">
+                        <img class="poster" />
 
-    if(similar && similar.length)
-        similar.map(item => $('#similar').innerHTML += `<li>\u2023 <a href="?${type}=${item.id}">${item[tv?`${/^u[sk]$/i.test(country)?'':'original_'}name`:'title']} (${item[tv?'first_air_date':'release_date'].slice(0,4)})</a></li>`);
+                        <h3 class="title">${ title || name }</h3>
+                        <h6 class="year">${ year }</h6>
+                        <div class="meta">
+                            <!--
+                            <span class="rating">N/R</span>
+                            <span class="runtime">0:00</span>
+                            -->
+                            <span class="genre">${ genre_ids.map(g => genres[g]).join('/') }</span>
+                        </div>
+
+                        <div class="description">${ maxWidth(overview, 100) }</div>
+
+                        <!--
+                        <div class="share">
+                            <ul>
+                                <li class="share" title="Share"><i class="material-icons">share</i></li>
+                                <li class="like" title="Like"><i class="material-icons">favorite</i></li>
+                                <li class="trailer" title="Watch trailer"><i class="material-icons">movie</i></li>
+                            </ul>
+                        </div>
+                        -->
+                    </div>
+                </div>
+                <div class="blur-effect" style="background: url('img/noise.png') fixed, url('https://image.tmdb.org/t/p/original${ backdrop_path }') fixed center / cover no-repeat;"></div>
+            </a>
+        `;
+
+        $('#related').innerHTML += html;
+
+        let element = $(`#card_${ controller_id } .data .header .poster`);
+
+        element.crossOrigin = "Anonymous";
+        element.src = `https://image.tmdb.org/t/p/original${ poster_path }`;
+
+        if(element.complete) {
+            SetDominantColor(element, `#card_${ controller_id }`, 200);
+        } else {
+            element.addEventListener('load', event => SetDominantColor(event.target, `#card_${ controller_id }`, 200));
+        }
+    }
 }
 
 async function as(type, id) {
-    open(`blank.html`, 'frame');
-
     let data = {},
         tv = type == 'tv';
+
+    $('#head').setAttribute('type', type);
+    $('#related').setAttribute('type', type == 'tv'? 'TV Show': 'Movie');
+    $('#mix').setAttribute('title', `Go to a random ${ type == 'tv'? 'show': type }`);
+
     await fetch(`https://api.themoviedb.org/3/${ type }/${ id }?api_key=${ apikey }`, { method: 'GET' })
         .then(r => r.json())
         .then(json => {
             let poster = [json.backdrop_path, json.poster_path],
-                title  = json[tv? `${/^u[sk]$/i.test(country)?'':'original_'}name`: 'title'],
+                title  = json[tv? `${ /^u[sk]$/i.test(country)? '': 'original_' }name`: 'title'],
                 releaseDate = json[tv? 'first_air_date': 'release_date'],
                 year   = parseInt(releaseDate),
                 genre  = json.genres.map(g => g.name).sort().join(' / '),
@@ -176,7 +293,7 @@ async function popular(type) {
         .then(r => r.json())
         .then(json => {
             let { results } = json,
-                length = results.length;
+                { length } = results;
 
             let item = results[(Math.random()*length)|0];
 
@@ -184,52 +301,18 @@ async function popular(type) {
         });
 }
 
-document.querySelectorAll('#back, #movie, #tv, #similar a').forEach(element => {
-    element.onmousedown = async event => {
-        let title = $('#title').textContent,
-            year  = $('#year').textContent;
-
-        SynQ.set('last-item', location.search);
-        SynQ.set('last-title', `${ title } (${ year })`);
-    };
-});
-
-document.querySelectorAll('#movie, #tv').forEach(element => {
+document.querySelectorAll('#movie, #tv, #mix').forEach(element => {
     element.onmouseup = async event => {
         let self = event.target;
-        let data = await popular(self.id);
+        let type = $('#data').getAttribute('type'),
+            data = await popular(self.id == 'mix'? type: (type = self.id));
 
-        location.search = `?${self.id}=${data.info.tmdb}`;
+        location.search = `?${type}=${data.info.tmdb}`;
     };
-});
-
-document.querySelectorAll('[target="frame"]').forEach(element => {
-    let body = document.body,
-        frame = $('#frame'),
-        loading = $('#loading');
-
-    element.onmouseup = event => {
-        frame.setAttribute('loading', true);
-        loading.setAttribute('loading', true);
-        loading.removeAttribute('style');
-    }
-
-    frame.onload = frame.onerror = event => {
-        frame.setAttribute('loading', false);
-        loading.setAttribute('loading', false);
-        setTimeout(() => loading.setAttribute('style', 'display:none'), 500);
-    }
 });
 
 document.body.onload = event => {
-    let data = SynQ.get('login-data'),
-        last_item = SynQ.get('last-item') || '?',
-        last_title = SynQ.get('last-title') || '...';
-
-    if(last_title) {
-        $('#back').setAttribute('title', `Back to "${ last_title }"`);
-        $('#back').onmouseup = event => open(last_item, '_self');
-    }
+    let data = SynQ.get('login-data');
 
     if(data) {
         data = decodeURIComponent(data);
@@ -257,7 +340,7 @@ $('#search').addEventListener('keyup', event => {
     if(searching)
         clearTimeout(searching);
 
-    let type = $('#info').getAttribute('type'),
+    let type = $('#data').getAttribute('type'),
         query = $('#search').value,
         Query = [];
 
@@ -345,11 +428,26 @@ $('#search').addEventListener('keyup', event => {
     }, 500);
 });
 
-$('#logout').onmouseup = event => {
+$('#logout').addEventListener('mouseup', event => {
     SynQ.clear();
 
     open(location.search || '', '_self');
-};
+});
+
+$('#share .trailer').addEventListener('mouseup', event => {
+    let frame = $('#frame'),
+        self = event.target;
+
+    frame.addEventListener('load', event => {
+        frame.setAttribute('in-use', true);
+    });
+});
+
+$('#close').addEventListener('mouseup', event => {
+    open('blank.html', 'frame');
+
+    setTimeout(() => $('#frame').removeAttribute('in-use'), 100);
+});
 
 if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
