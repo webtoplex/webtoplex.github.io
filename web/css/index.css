@@ -4,15 +4,40 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
+ /* Plex font */
 @font-face {
     font-family: "Plex";
+    font-style: normal;
+    font-weight: 400;
     src: url("/font/Plex.woff2") format("woff2"),
         url("/font/Plex.woff") format("woff");
 }
 
+/* Material Icons */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/font/Material Icons.woff2") format("woff2");
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Styling the website */
 * {
     box-sizing: border-box;
 
@@ -111,7 +136,6 @@ html, body {
 
 #frame {
     display: none !important;
-    opacity: 1;
 
     border: none;
     background: #0008;
@@ -128,10 +152,6 @@ html, body {
 
 #frame[in-use="true"i] {
     display: block !important;
-}
-
-#frame[src="blank.html"i] {
-    opacity: 0;
 }
 
 /* Body - https://codepen.io/simoberny/pen/qxxOqj */
