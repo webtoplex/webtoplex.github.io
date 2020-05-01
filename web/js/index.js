@@ -2,7 +2,8 @@ var use_global_synq_token = true;
 
 let $ = selector => document.querySelector(selector),
     R = RegExp,
-    apikey, country,
+    apikey, likes,
+    user,
     genres = {
         28:    "Action",
         12:    "Adventure",
@@ -63,32 +64,54 @@ function modify({ type, title, year, similar, info }) {
             random_palette = [color, ...palette].sort(() => Math.random() - 0.5),
             random = () => random_palette.pop(),
             name = container.replace(/\W+/g, ''),
-            first;
+            stylise = property => {
+                let values = [];
+
+                if(!styled || !styled.length) {
+                    for(let random_color, index = 1, length = random_palette.length; index < length; index++) {
+                        random_color = random_palette.pop();
+
+                        values.push(`${ ((index / length) * 100) | 0 }% { %property% rgb(${ random_color }) }`);
+                    }
+
+                    styled = values;
+                } else {
+                    values = styled;
+                }
+
+                return values.join('\n' + ' '.repeat(16)).replace(/%property%/ig, property);
+            },
+            first, styled,
+            mode = container[0];
 
         $('#after-effect').innerHTML += `
-            /* Animate ${ container } */
+            /* Animate ${ container } - rgb(${ first = random() }) */
             ${ container } {
-                box-shadow: 0 0 100px -45px rgb(${ first = random() });
+                box-shadow: 0 0 100px -45px rgb(${ first });
             }
 
             ${ container }:hover {
-                animation: color-${ name } 15s infinite;
+                animation: color-box-shadow-${ name } 15s infinite;
             }
 
-            @keyframes color-${ name } {
-                ${
-                    (() => {
-                        let values = [`0% { box-shadow: 0 0 100px -45px rgb(${ first }) }`];
+            ${ container } ${ mode }share li {
+                --text-shadow: 0 0 0 rgb(${ first });
+            }
 
-                        for(let random_color, index = 1, length = random_palette.length; index < length; index++) {
-                            random_color = random_palette.pop();
+            ${ container }:hover ${ mode }share li {
+                --animation: color-text-${ name } 15s infinite;
+            }
 
-                            values.push(`${ ((index / length) * 100) | 0 }% { box-shadow: 0 0 100px -45px rgb(${ random_color }) }`);
-                        }
+            @keyframes color-background-${ name } {
+                ${ stylise('background:') }
+            }
 
-                        return values.join('\n                ');
-                    })()
-                }
+            @keyframes color-box-shadow-${ name } {
+                ${ stylise('box-shadow: 0 0 100px -45px') }
+            }
+
+            @keyframes color-text-${ name } {
+                ${ stylise('text-shadow: 0 0 0') }
             }
         `;
     };
@@ -115,7 +138,39 @@ function modify({ type, title, year, similar, info }) {
                     element.addEventListener('load', event => SetDominantColor(event.target));
                 }
             } else if(/^(trailer)$/i.test(key)) {
-                element.href = `https://www.youtube.com/embed/${ value }`;
+                element.href = ({
+                    "trailer": `https://www.youtube.com/embed/${ value }`
+                }[key]);
+            } else if(/^(export)$/i.test(key)) {
+                let data = {
+                    title: `${ title } (${ year })`,
+                    text: `Web to Plex - ${ title } (${ year })`,
+                    url: location.href,
+                    hashtags: ([title, type, 'webtoplex'] + ''),
+                };
+
+                $('#share').setAttribute('data', JSON.stringify(data));
+
+                if(navigator.share) {
+                    $('#share .export').href = '#:share';
+                    $('#share .export').addEventListener('mouseup', event => {
+                        let data = $('#share').getAttribute('data');
+
+                        navigator.share(JSON.parse(data), { language: user.languages[0], print: false, skype: false, linkedin: false });
+                    });
+                }
+            } else if(/^(like)$/i.test(key)) {
+                let i = (+object.tmdb).toString(36),
+                    t = type[0],
+                    liked = !!~likes.indexOf(i + t),
+                    liker = $('#share .like');
+
+                liker.setAttribute('liked', liked);
+                liker.setAttribute('like-id', i + t);
+                liker.href = `#${ i + t }:like`;
+                liker.querySelector('*').innerHTML = 'favorite' + ['_border',''][+liked];
+
+                tally_votes(liked);
             } else {
                 element.innerHTML = value.join? value.join('/'): value;
             }
@@ -157,10 +212,13 @@ function modify({ type, title, year, similar, info }) {
          */
         let { adult, backdrop_path, first_air_date, genre_ids, id, name, original_language, original_name, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count } = item,
             year = parseInt(release_date || first_air_date),
-            controller_id = poster_path.replace(/\W+/g, '');
+            controller_id = '_' + poster_path.replace(/\W+/g, '');
+
+        let lkid = id.toString(36) + type[0],
+            lked = !!~likes.indexOf(lkid);
 
         let html = `
-            <a id="card_${ controller_id }" class="card" href="?${ type }=${ id }" title="${ original_title || original_name }">
+            <a class="card ${ controller_id }" href="?${ type }=${ id }" title="${ original_title || original_name }">
                 <div class="data" type="${ type }">
                     <div class="header">
                         <img class="poster" />
@@ -169,23 +227,20 @@ function modify({ type, title, year, similar, info }) {
                         <h6 class="year">${ year }</h6>
                         <div class="meta">
                             <!--
-                            <span class="rating">N/R</span>
-                            <span class="runtime">0:00</span>
+                            <div class="rating"></div>
+                            <div class="runtime"></div>
+                            <div id="votes"></div>
                             -->
-                            <span class="genre">${ genre_ids.map(g => genres[g]).join('/') }</span>
+                            <div class="genre">${ genre_ids.map(g => genres[g]).join('/') }</div>
                         </div>
 
                         <div class="description">${ maxWidth(overview, 100) }</div>
 
-                        <!--
                         <div class="share">
                             <ul>
-                                <li class="share" title="Share"><i class="material-icons">share</i></li>
-                                <li class="like" title="Like"><i class="material-icons">favorite</i></li>
-                                <li class="trailer" title="Watch trailer"><i class="material-icons">movie</i></li>
+                                <li class="like" onmouseup="tally_likes('${ lkid }')" like-id="${ lkid }" liked="${ lked }"><i class="material-icons">favorite${ ['_border',''][+lked] }</i></li>
                             </ul>
                         </div>
-                        -->
                     </div>
                 </div>
                 <div class="blur-effect" style="background: url('img/noise.png') fixed, url('https://image.tmdb.org/t/p/original${ backdrop_path }') fixed center / cover no-repeat;"></div>
@@ -194,15 +249,15 @@ function modify({ type, title, year, similar, info }) {
 
         $('#related').innerHTML += html;
 
-        let element = $(`#card_${ controller_id } .data .header .poster`);
+        let element = $(`.card.${ controller_id } .data .header .poster`);
 
         element.crossOrigin = "Anonymous";
         element.src = `https://image.tmdb.org/t/p/original${ poster_path }`;
 
         if(element.complete) {
-            SetDominantColor(element, `#card_${ controller_id }`, 200);
+            SetDominantColor(element, `.card.${ controller_id }`, 200);
         } else {
-            element.addEventListener('load', event => SetDominantColor(event.target, `#card_${ controller_id }`, 200));
+            element.addEventListener('load', event => SetDominantColor(event.target, `.card.${ controller_id }`, 200));
         }
     }
 }
@@ -219,21 +274,21 @@ async function as(type, id) {
         .then(r => r.json())
         .then(json => {
             let poster = [json.backdrop_path, json.poster_path],
-                title  = json[tv? `${ /^u[sk]$/i.test(country)? '': 'original_' }name`: 'title'],
+                title  = json[tv? `${ /^u[sk]$/i.test(user.country)? '': 'original_' }name`: 'title'],
                 releaseDate = json[tv? 'first_air_date': 'release_date'],
                 year   = parseInt(releaseDate),
                 genre  = json.genres.map(g => g.name).sort().join(' / '),
                 imdb   = json.imdb_id,
                 description = json.overview,
-                runtime = (m => {let h=0;for(;m>=60;m-=60,h++);return [h,('0'+m).slice(-2)]})(json[tv?'episode_run_time':'runtime']|0).join(':')+(tv?'/Eps':''),
+                runtime = (m => {let h=0;for(;m>=60;m-=60,h++);return [h,('0'+m).slice(-2)]})(json[tv?'episode_run_time':'runtime']|0).join('h ')+'m'+(tv?' (per episode)':''),
                 { vote_average, vote_count } = json;
 
             data = {
                 type, title, year,
                 'info': {
                     runtime, genre, poster, description,
-                    'release-date': `${ releaseDate.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, ($0, $1, $2, $3, $$, $_) => `${['January','February','March','April','May','June','July','August','September','October','November','December'][(+$2)-1]} ${$3}, ${$1}`) } (${ country })`,
-                    'votes': `${(vote_average * 10)|0}% (${comify(vote_count||0)} votes)`,
+                    'release-date': `${ releaseDate.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, ($0, $1, $2, $3, $$, $_) => `${['January','February','March','April','May','June','July','August','September','October','November','December'][(+$2)-1]} ${$3}, ${$1}`) } (${ user.country })`,
+                    'votes': `<span title="${(vote_average * 10)|0}% of people that watched '${ title }' liked it">${comify(vote_count||0)} <i class="material-icons">favorite</i></span>`,
 
                     'imdb': imdb,
                     'tmdb': id,
@@ -246,7 +301,7 @@ async function as(type, id) {
         .then(r => r.json())
         .then(json => {
             if(json.results && json.results.length) {
-                let results = json.results.filter(result => result.iso_3166_1 === country)[0] || json.results.filter(results => results.iso_3166_1)[0];
+                let results = json.results.filter(result => result.iso_3166_1 === user.country)[0] || json.results.filter(results => results.iso_3166_1)[0];
 
                 if(tv)
                     data.info.rating = results.rating;
@@ -260,8 +315,11 @@ async function as(type, id) {
     await fetch(`https://api.themoviedb.org/3/${ type }/${ id }/videos?api_key=${ apikey }`, { method: 'GET' })
         .then(r => r.json())
         .then(json => {
-            if(json.results && json.results.length)
-                data.info.trailer = json.results.filter(result => result.iso_3166_1 === country)[0].key;
+            if(json.results && json.results.length) {
+                data.info.trailer = json.results.filter(result => result.iso_3166_1 === user.country)[0].key;
+                data.info.export = true;
+                data.info.like = true;
+            }
         });
 
     // Similar Content
@@ -273,7 +331,7 @@ async function as(type, id) {
             if(results && results.length)
                 data.similar = results;
             else
-                await fetch(`https://api.themoviedb.org/3/${type}/popular?api_key=${apikey}&page=${((Math.random()*10)|0)||1}`, { method: 'GET' })
+                await fetch(`https://api.themoviedb.org/3/${ type }/popular?api_key=${ apikey }&page=${((Math.random()*10)|0)||1}`, { method: 'GET' })
                     .then(r => r.json())
                     .then(json => {
                         let { results } = json;
@@ -282,8 +340,6 @@ async function as(type, id) {
                             data.similar = results;
                     });
         });
-
-    console.log(data);
 
     return modify(data), data;
 }
@@ -317,13 +373,20 @@ document.body.onload = event => {
     if(data) {
         data = decodeURIComponent(data);
         data = atob(data);
-        data = SynQ.inflate(data);
+        data = JSON.parse(data);
 
         apikey = data.apikey;
-        country = data.country;
+        likes = JSON.parse(SynQ.get('likes') || '[]');
+
+        let country = data.country.toUpperCase();
+
+        user = {
+            country,
+            ...COUNTRY_DATA[country],
+        };
     } else {
         /* Login Page */
-        return open(`login.html${location.search||''}`, '_self');
+        return open(`login.html${ location.search || '' }`, '_self');
     }
 
     /\?(movie|tv)(?:\=(\d+))?/i.test(location.search)?
@@ -331,7 +394,7 @@ document.body.onload = event => {
     (async() => {
         let data = await popular(['movie','tv'][+(Math.random>0.5)]);
 
-        location.search = `?${data.type}=${data.info.tmdb}`;
+        location.search = `?${ data.type }=${ data.info.tmdb }`;
     })();
 };
 
@@ -443,6 +506,13 @@ $('#share .trailer').addEventListener('mouseup', event => {
     });
 });
 
+$('#share .like').addEventListener('mouseup', event => {
+    let self = event.target,
+        lkid = $('#share .like').getAttribute('like-id');
+
+    tally_likes(lkid);
+});
+
 $('#close').addEventListener('mouseup', event => {
     open('blank.html', 'frame');
 
@@ -458,7 +528,32 @@ if('serviceWorker' in navigator) {
                 console.log(`Service Worker registered [${ worker.scope }]:`, worker);
             }, error => {
                 // Error
-                console.error(`Service Worker not registered:`, error)
+                console.error(`Service Worker not registered:`, error);
             });
     });
+}
+
+/* Helper functions */
+function tally_likes(like_id) {
+    let liker = $(`[like-id="${ like_id }"]`),
+        liked = liker.getAttribute('liked') === 'true';
+
+    liked = !liked;
+
+    liker.setAttribute('liked', liked);
+    liker.setAttribute('title', liked? 'Dislike': 'Like');
+    liker.querySelector('*').innerHTML = 'favorite' + ['_border',''][+liked];
+
+    if(liked)
+        likes.push(like_id);
+    else
+        likes = (likes + '').replace(like_id, '').replace(/,{2,}/g, ',').split(',').filter(v => v.length);
+
+    tally_votes(liked? +1: -1);
+
+    SynQ.set('likes', JSON.stringify(likes));
+}
+
+function tally_votes(vote) {
+    $('#votes *').innerHTML =  $('#votes *').innerHTML.replace(/([\d,]+)/, ($0, $1, $$, $_) => comify(parseInt($1.replace(/,/g, '')) + +vote));
 }

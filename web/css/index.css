@@ -210,6 +210,10 @@ html, body {
     width: 100%;
 }
 
+#title, .card .data .header .title, #year, .card .data .header .year, #genres, .card .data .header .genres {
+    width: 150%;
+}
+
 #title, .card .data .header .title {
     color: #fff;
     font-weight: 400;
@@ -220,13 +224,16 @@ html, body {
     font-weight: 400;
 }
 
-#rating, .card .data .header .meta .rating,
-#runtime, .card .data .header .meta .runtime {
+#meta > *:not(:last-child), .meta > *:not(:last-child) {
+    font-family: monospace;
+    font-size: 14px;
+}
+
+#rating, .card .data .header .meta .rating {
     border: 1px solid;
     border-radius: 2px;
     box-sizing: border-box;
     display: inline-block;
-    font-family: monospace;
     text-transform: uppercase;
 
     line-height: 100%;
@@ -245,28 +252,68 @@ html, body {
 }
 
 #poster, .card .data .header .poster {
+    border-radius: 10px;
     box-shadow: 0 0 20px -10px #0008;
 
     float: left;
-    margin-right: 20px;
+    margin-right: 30px;
     position: relative;
+}
 
+#poster {
+    width: 155px;
+}
+
+.card .data .header .poster {
     height: 200px;
 }
 
 #description, .card .data .description {
     color: #cfd6e1;
 
-    padding: 25px;
+    padding: 25px 0 10px;
 
     height: 50%;
 }
 
-#share, .card .data .share {
-    padding-left: 15px;
-    padding-bottom: 20px;
+#description {
+    padding-left: 10px;
+}
 
-    height: 10%;
+#share {
+    margin-top: 1%;
+}
+
+.card .data .share {
+    position: absolute;
+    right: 155px;
+}
+
+/* #share, .card .data .share {
+    position: absolute;
+
+    height: 15%;
+}
+
+#share {
+    bottom: 0;
+    right: 0;
+} */
+
+.card .data .share {
+    bottom: 0;
+    left: 155px;
+
+    width: calc(100% - 145px);
+}
+
+.card .data .share ul {
+    bottom: 5px;
+    position: absolute;
+}
+
+.card .data .share .material-icons {
+    vertical-align: middle;
 }
 
 #share ul, .card .data .share ul {
@@ -295,9 +342,19 @@ html, body {
     -webkit-transition: color 0.3s;
 }
 
+#share ul li:first-child {
+    margin-left: 0;
+}
+
+#share ul li:last-child {
+    margin-right: 0;
+}
+
 #card .material-icons, .card .material-icons {
     cursor: pointer;
-    font-size: 19px;
+    font-size: 20px;
+
+    vertical-align: bottom;
 }
 
 #blur-effect, .card .blur-effect {
@@ -421,8 +478,8 @@ input[type]:valid:not(:placeholder-shown) + label[for] {
 
 @media screen and (min-width: 768px) {
     #data, .card .data {
-        background: linear-gradient(to right, #0d0d0c 50%, #0000 100%);
-        background: -webkit-gradient(linear, left top, right top, color-stop(50%, #0d0d0c), to(#0000));
+        background: linear-gradient(to right, #0008 50%, #0000 100%);
+        background: -webkit-gradient(linear, left top, right top, color-stop(50%, #0008), to(#0000));
     }
 
     #header, .card .data .header {
@@ -436,7 +493,7 @@ input[type]:valid:not(:placeholder-shown) + label[for] {
     #blur-effect, .card .blur-effect {
         background-position: -100% 10% !important;
 
-        width: 80%;
+        width: 100%;
     }
 }
 
@@ -450,8 +507,8 @@ input[type]:valid:not(:placeholder-shown) + label[for] {
     }
 
     #data, .card .data {
-        background: linear-gradient(to right, #0d0d0c 50%, #0000 100%);
-        background: -webkit-gradient(linear, left top, right top, color-stop(50%, #0d0d0c), to(#0000));
+        background: linear-gradient(to right, #0008 50%, #0000 100%);
+        background: -webkit-gradient(linear, left top, right top, color-stop(50%, #0008), to(#0000));
         display: inline-grid;
     }
 

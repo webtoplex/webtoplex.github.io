@@ -39,23 +39,24 @@
             <div id="header">
                 <img id="poster" />
 
-                <h1 id="title">Movie</h1>
-                <h4 id="year">1970</h4>
+                <h1 id="title"></h1>
+                <h2 id="year"></h2>
                 <div id="meta">
-                    <span id="rating">N/R</span>
-                    <span id="runtime">0:00</span>
-                    <span id="genre">Action</span>
+                    <div id="rating"></div>
+                    <div id="runtime"></div>
+                    <div id="votes"></div>
+                    <div id="genre"></div>
                 </div>
-
-                <div id="description">Movie description...</div>
 
                 <div id="share">
                     <ul>
-                        <li title="Share"><a class="share" target="frame"><i class="material-icons">share</i></a></li>
-                        <li title="Like"><a class="like" target="frame"><i class="material-icons">favorite</i></a></li>
+                        <li title="Share"><a class="export" target="frame"><i class="material-icons">share</i></a></li>
+                        <li title="Like"><a class="like" target="frame"><i class="material-icons">favorite_border</i></a></li>
                         <li title="Watch trailer"><a class="trailer" target="frame"><i class="material-icons">movie</i></a></li>
                     </ul>
                 </div>
+
+                <div id="description"></div>
             </div>
         </div>
         <div id="blur-effect"></div>
@@ -76,7 +77,15 @@
     </div>
 
     <style id="after-effect"></style>
+    <!-- Country data - https://github.com/samayo/country-json/blob/master/src/country-by-abbreviation.json -->
+    <script src="js/country-data.js"></script>
+
+    <!-- Dependencies -->
+    <!-- Color Thief - https://lokeshdhakar.com/projects/color-thief/ -->
     <script src="js/color-thief.js"></script>
+    <!-- Share API Polyfill - https://awesomeopensource.com/project/NascHQ/share-api-polyfill -->
+    <script src="js/share.min.js"></script>
+    <!-- @ephellon -->
     <script src="js/synq.js"></script>
     <script src="js/index.js"></script>
 </body>

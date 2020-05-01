@@ -1441,7 +1441,7 @@ SynQ.help = function(item) {
       break;
 
     case 'deflate':
-      m = "Polyfill of JSON.stringify. Defaltes\\serializes objects (turns them into strings)./~Usage: $.@(object[, filter[, spaces]])/~Arguments: *[, Function[, String | Number]]/~Returns: String => '<object>'//object: any JavaScript object./filter: searches for true\\non-empty entries. Called on as:/~for(var key in <object>)/~~<filter>(key, <object>[key]);//spaces: if set, then the ouput will be stylised using indentation."
+      m = "Polyfill of JSON.stringify. Defaltes\\serializes objects (turns them into strings)./~Usage: $.@(object[, filter[, spaces]])/~Arguments: *[, Function[, String | Number]]/~Returns: String => '<object>'//object: any JavaScript object./filter: searches for true\\non-empty entries. Called on as:/~for(var key in <object>)/~~<filter>(key, <object>[key]);//spaces: if set, then the output will be stylised using indentation."
       break;
 
     case 'download':
@@ -1728,7 +1728,7 @@ if(!("localStorage" in window || "sessionStorage" in window) || (use_cookie_synq
       configurable: false,
       enumerable:   false
     });
-    
+
     Object.defineProperty(StorageObject, "clear", {
       value: function() {
         if(keys.length == undefined || keys.length == null)
