@@ -446,7 +446,7 @@ $('#share .trailer').addEventListener('mouseup', event => {
 $('#close').addEventListener('mouseup', event => {
     open('blank.html', 'frame');
 
-    setTimeout(() => $('#frame').removeAttribute('in-use'), 100);
+    setTimeout(() => $('#frame').setAttribute('in-use', false), 1000);
 });
 
 if('serviceWorker' in navigator) {

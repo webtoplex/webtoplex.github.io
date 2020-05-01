@@ -111,6 +111,7 @@ html, body {
 
 #frame {
     display: none !important;
+    opacity: 1;
 
     border: none;
     background: #0008;
@@ -121,10 +122,16 @@ html, body {
 
     height: 90vh;
     width: 95%;
+
+    transition: opacity 1s;
 }
 
 #frame[in-use="true"i] {
     display: block !important;
+}
+
+#frame[src="blank.html"i] {
+    opacity: 0;
 }
 
 /* Body - https://codepen.io/simoberny/pen/qxxOqj */
