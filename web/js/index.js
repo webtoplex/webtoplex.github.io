@@ -292,6 +292,9 @@ async function as(type, id) {
 
                     'imdb': imdb,
                     'tmdb': id,
+
+                    'like': true,
+                    'export': true,
                 },
             };
         });
@@ -317,8 +320,6 @@ async function as(type, id) {
         .then(json => {
             if(json.results && json.results.length) {
                 data.info.trailer = json.results.filter(result => result.iso_3166_1 === user.country)[0].key;
-                data.info.export = true;
-                data.info.like = true;
             }
         });
 

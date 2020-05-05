@@ -359,7 +359,7 @@ html, body {
 
 #blur-effect, .card .blur-effect {
     background-size: cover;
-    border-radius: 11px;
+    border-radius: 10px;
 
     position: absolute;
     right: 0;
