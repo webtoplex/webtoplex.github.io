@@ -172,6 +172,9 @@ function modify({ type, title, year, similar, info }) {
 
                 tally_votes(liked);
             } else {
+                if(key == 'year')
+                    element.setAttribute('title', object['release-date']);
+
                 element.innerHTML = value.join? value.join('/'): value;
             }
         }
