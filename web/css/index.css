@@ -15,7 +15,7 @@
 
 /* Material Icons */
 @font-face {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
   src: url("/font/Material Icons.woff2") format("woff2");
@@ -119,6 +119,8 @@ html, body {
 #results a {
     display: block;
     overflow: hidden;
+    text-align: left;
+    text-decoration: none;
     text-shadow: none !important;
 }
 
@@ -127,11 +129,6 @@ html, body {
 
     height: 75%;
     width: calc(100% - 100px);
-}
-
-#results a {
-    text-align: left;
-    text-decoration: none;
 }
 
 #frame {

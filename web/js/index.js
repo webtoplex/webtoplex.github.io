@@ -58,7 +58,7 @@ function modify({ type, title, year, similar, info }) {
 
     $('#data').setAttribute('type', type);
 
-    let SetDominantColor = (image, container = '#card', sample_size = 50) => {
+    let SetDominantColor = (image, container = '#card', sample_size = 500) => {
         let color = ColorPicker.getColor(image, sample_size),
             palette = ColorPicker.getPalette(image, null, sample_size),
             random_palette = [color, ...palette].sort(() => Math.random() - 0.5),
@@ -254,13 +254,14 @@ function modify({ type, title, year, similar, info }) {
 
         let element = $(`.card.${ controller_id } .data .header .poster`);
 
+        /* Handle poster element */
         element.crossOrigin = "Anonymous";
         element.src = `https://image.tmdb.org/t/p/original${ poster_path }`;
 
         if(element.complete) {
-            SetDominantColor(element, `.card.${ controller_id }`, 200);
+            SetDominantColor(element, `.card.${ controller_id }`, 2000);
         } else {
-            element.addEventListener('load', event => SetDominantColor(event.target, `.card.${ controller_id }`, 200));
+            element.addEventListener('load', event => SetDominantColor(event.target, `.card.${ controller_id }`, 2000));
         }
     }
 }
