@@ -139,7 +139,7 @@ function modify({ type, title, year, similar, info }) {
                 }
             } else if(/^(trailer)$/i.test(key)) {
                 element.href = ({
-                    "trailer": `https://www.youtube.com/embed/${ value }`
+                    "trailer": ['https://www.dailymotion.com/embed/video/', 'https://www.youtube.com/embed/'][+(value.length == 11)] + value
                 }[key]);
             } else if(/^(export)$/i.test(key)) {
                 let data = {
@@ -519,7 +519,7 @@ $('#share .like').addEventListener('mouseup', event => {
 });
 
 $('#close').addEventListener('mouseup', event => {
-    open('blank.html', 'frame');
+    $('#frame').src = 'blank.html';
 
     setTimeout(() => $('#frame').setAttribute('in-use', false), 1000);
 });
