@@ -381,7 +381,7 @@ document.body.onload = event => {
         data = JSON.parse(data);
 
         apikey = data.apikey;
-        likes = JSON.parse(SynQ.get('likes') || '[]');
+        likes = (SynQ.get('likes') || '').split(',');
 
         let country = data.country.toUpperCase();
 
@@ -556,7 +556,7 @@ function tally_likes(like_id) {
 
     tally_votes(liked? +1: -1);
 
-    SynQ.set('likes', JSON.stringify(likes));
+    SynQ.set('likes', likes.join(','));
 }
 
 function tally_votes(vote) {
