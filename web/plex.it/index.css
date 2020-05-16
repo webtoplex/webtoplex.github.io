@@ -303,8 +303,9 @@ table {
 }
 @font-face {
     font-family: 'icomoon';
-    src: url('https://static.plex.tv/assets/icomoon-20fbdc133192b0431938a3b537263a66b5aeec9ab878205f1b617c7ff7f55bf0.eot');
-    src: url('https://static.plex.tv/assets/icomoon-20fbdc133192b0431938a3b537263a66b5aeec9ab878205f1b617c7ff7f55bf0.eot?#iefix') format('embedded-opentype'), url('https://static.plex.tv/assets/icomoon-809f8990066b828d27185ebcc7c4cd16a42a7734a5d2f8737fb75292824b9b54.woff') format('woff'), url('https://static.plex.tv/assets/icomoon-6b6f42bc9801b47fdc33e90bf069e587b5509caeccb95bceab10374fa54c64c8.ttf') format('truetype'), url('https://static.plex.tv/assets/icomoon-4064030857d5428bf85df32ca15add7c73369518f0c6e2817267b4443ac8338d.svg#icomoon') format('svg');
+    src: url('/font/IcoMoon.woff2') format('woff2'),
+        url('/font/IcoMoon.woff') format('woff'),
+        url('/font/IcoMoon.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
