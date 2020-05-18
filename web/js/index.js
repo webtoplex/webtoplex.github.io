@@ -508,6 +508,7 @@ $('#share .trailer').addEventListener('mouseup', event => {
 
     frame.addEventListener('load', event => {
         frame.setAttribute('in-use', true);
+        frame.removeAttribute('src');
     });
 });
 
@@ -519,9 +520,10 @@ $('#share .like').addEventListener('mouseup', event => {
 });
 
 $('#close').addEventListener('mouseup', event => {
-    $('#frame').src = 'blank.html';
+    let frame = $('#frame'),
+        self = event.target;
 
-    setTimeout(() => $('#frame').setAttribute('in-use', false), 1000);
+    setTimeout(() => frame.setAttribute('in-use', false), 1000);
 });
 
 if('serviceWorker' in navigator) {
